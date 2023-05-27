@@ -15,7 +15,8 @@ export class AppController {
   
   @Get(':id')
   getReportById(
+    @Param('type') type: string,
     @Param('id') id: string){
-      
+
     }
 }
