@@ -9,7 +9,7 @@ interface Data{
         amount: number;
         createdAt: Date;
         updateddAt: Date;
-        type: string;
+        type: "income" | "expense"
 
     }[]
 }
