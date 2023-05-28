@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { data, ReportType } from './data';
 
@@ -20,5 +20,11 @@ export class AppController {
     return data.report
       .filter((report) => report.type === reportType)
       .find((report) => report.id === id);
+  }
+
+  @Post()
+  createReport(@Body() body: { amount: string; source: string }) {
+    console.log({ body });
+    return 'created';
   }
 }
