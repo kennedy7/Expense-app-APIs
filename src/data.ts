@@ -34,13 +34,3 @@ interface Data {
     type: ReportType;
   }[];
 }
-
-// data.report.push({
-//     id: "uuid",
-//     source: "Salary",
-//     amount: 150000,
-//     createdAt: new Date(),
-//     updateddAt: new Date(),
-//     type: ReportType.EXPENSE
-
-// })
