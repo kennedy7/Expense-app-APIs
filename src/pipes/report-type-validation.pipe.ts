@@ -2,7 +2,7 @@ import { PipeTransform } from '@nestjs/common';
 import { BadRequestException } from '@nestjs/common/exceptions';
 import { ReportType } from 'src/data';
 
-export class TaskStatusValidationPipe implements PipeTransform {
+export class ReportTypeValidationPipe implements PipeTransform {
   readonly allowedReportTypes = [ReportType.EXPENSE, ReportType.INCOME];
   transform(value: any) {
     value = value.toUpperCase();
