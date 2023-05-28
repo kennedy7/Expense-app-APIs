@@ -5,14 +5,14 @@ export enum ReportType{
 
 export const data: Data = {
     report: [{
-        id: "uuid",
+        id: "uuid1",
         source: "Salary",
         amount: 150000,
         createdAt: new Date(),
         updateddAt: new Date(),
         type: ReportType.INCOME
     }, {
-        id: "uuid",
+        id: "uuid2",
         source: "maintenance",
         amount: 30000,
         createdAt: new Date(),
