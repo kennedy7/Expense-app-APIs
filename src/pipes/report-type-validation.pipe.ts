@@ -5,7 +5,7 @@ import { ReportType } from 'src/data';
 export class ReportTypeValidationPipe implements PipeTransform {
   readonly allowedReportTypes = [ReportType.EXPENSE, ReportType.INCOME];
   transform(value: any) {
-    value = value.toUpperCase();
+    value = value.toLowerCase();
     if (!this.isTypeValid(value)) {
       throw new BadRequestException(`${value} is not a valid Report Type!`);
     }
