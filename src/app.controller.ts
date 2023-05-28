@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { data, ReportType } from './data';
+import { v4 as uuid } from 'uuid';
 
 @Controller('report/:type')
 export class AppController {
@@ -23,8 +24,5 @@ export class AppController {
   }
 
   @Post()
-  createReport(@Body() body: { amount: string; source: string }) {
-    console.log({ body });
-    return 'created';
-  }
+  createReport(@Body() body: { amount: string; source: string }) {}
 }
