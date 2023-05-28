@@ -38,5 +38,6 @@ export class AppController {
     };
 
     data.report.push(newReport);
+    return newReport;
   }
 }
