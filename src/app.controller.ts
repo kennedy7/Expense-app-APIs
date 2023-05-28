@@ -2,6 +2,7 @@ import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { data, ReportType } from './data';
 import { v4 as uuid } from 'uuid';
+import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 
 @Controller('report/:type')
 export class AppController {
@@ -15,7 +16,10 @@ export class AppController {
   }
 
   @Get(':id')
-  getReportById(@Param('type') type: string, @Param('id') id: string) {
+  getReportById(
+    @Param('type', ReportTypeValidationPipe) type: string,
+    @Param('id') id: string,
+  ) {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return data.report
@@ -26,7 +30,7 @@ export class AppController {
   @Post()
   createReport(
     @Body() { amount, source }: { amount: number; source: string },
-    @Param('type') type: string,
+    @Param('type', ReportTypeValidationPipe) type: string,
   ) {
     const newReport = {
       id: uuid(),
