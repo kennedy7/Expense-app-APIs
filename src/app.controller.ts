@@ -24,5 +24,17 @@ export class AppController {
   }
 
   @Post()
-  createReport(@Body() body: { amount: string; source: string }) {}
+  createReport(
+    @Body() { amount, source }: { amount: string; source: string },
+    @Param('type') type: string,
+  ) {
+    const newReport = {
+      id: uuid(),
+      source,
+      amount,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      type: type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    };
+  }
 }
