@@ -44,7 +44,7 @@ export class AppController {
     data.report.push(newReport);
     return newReport;
   }
-  @Patch()
+  @Patch(':id')
   updateReport(
     @Param('type', ReportTypeValidationPipe) type: string,
     @Param('id') id: string,
@@ -62,6 +62,8 @@ export class AppController {
     );
     data.report[reportIndex] = {
       ...data.report[reportIndex],
+      ...body,
     };
+    return data.report[reportIndex];
   }
 }
