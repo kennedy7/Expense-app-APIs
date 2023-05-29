@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { data, ReportType } from './data';
 import { v4 as uuid } from 'uuid';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
+import { NotFoundException } from '@nestjs/common/exceptions';
 
 @Controller('report/:type')
 export class AppController {
@@ -55,7 +56,10 @@ export class AppController {
     const reportToUpdate = data.report
       .filter((report) => report.type === reportType)
       .find((report) => report.id === id);
-    if (!reportToUpdate) return;
+    if (!reportToUpdate)
+      throw new NotFoundException(
+        'NO report with the Id or report type, check credentials and try again',
+      );
 
     const reportIndex = data.report.findIndex(
       (report) => report.id === reportToUpdate.id,
