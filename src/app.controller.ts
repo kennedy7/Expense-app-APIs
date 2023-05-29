@@ -60,5 +60,8 @@ export class AppController {
     const reportIndex = data.report.findIndex(
       (report) => report.id === reportToUpdate.id,
     );
+    data.report[reportIndex] = {
+      ...data.report[reportIndex],
+    };
   }
 }
