@@ -58,7 +58,7 @@ export class AppController {
       .find((report) => report.id === id);
     if (!reportToUpdate)
       throw new NotFoundException(
-        'NO report with the Id or report type, check credentials and try again',
+        'No report with the Id or report type, check credentials and try again',
       );
 
     const reportIndex = data.report.findIndex(
