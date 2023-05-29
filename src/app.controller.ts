@@ -48,5 +48,17 @@ export class AppController {
   updateReport(
     @Param('type', ReportTypeValidationPipe) type: string,
     @Param('id') id: string,
-  ) {}
+    @Body() body: { amount: number; source: string },
+  ) {
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    const reportToUpdate = data.report
+      .filter((report) => report.type === reportType)
+      .find((report) => report.id === id);
+    if (!reportToUpdate) return;
+
+    const reportIndex = data.report.findIndex(
+      (report) => report.id === reportToUpdate.id,
+    );
+  }
 }
