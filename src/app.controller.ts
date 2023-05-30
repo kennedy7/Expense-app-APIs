@@ -4,7 +4,7 @@ import { data, ReportType } from './data';
 import { v4 as uuid } from 'uuid';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { NotFoundException } from '@nestjs/common/exceptions';
-import { Delete } from '@nestjs/common/decorators';
+import { Delete, HttpCode } from '@nestjs/common/decorators';
 import { report } from 'process';
 
 @Controller('report/:type')
@@ -72,6 +72,7 @@ export class AppController {
     };
     return data.report[reportIndex];
   }
+  @HttpCode(204)
   @Delete(':id')
   deleteReport(@Param('id') id: string) {
     const reportIndex = data.report.findIndex((report) => report.id === id);
