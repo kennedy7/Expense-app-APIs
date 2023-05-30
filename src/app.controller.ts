@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { AppService } from './app.service';
-import { data, ReportType } from './data';
+import { ReportType } from './data';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
 
