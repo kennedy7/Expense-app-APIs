@@ -45,7 +45,14 @@ export class AppService {
     data.report[reportIndex] = {
       ...data.report[reportIndex],
       ...body,
+      updatedAt: new Date(),
     };
     return data.report[reportIndex];
+  }
+  deleteReport(id: string) {
+    const reportIndex = data.report.findIndex((report) => report.id === id);
+    if (reportIndex === -1) throw new NotFoundException();
+    data.report.splice(reportIndex, 1);
+    return;
   }
 }

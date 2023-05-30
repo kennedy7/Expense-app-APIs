@@ -47,8 +47,6 @@ export class AppController {
   @HttpCode(204)
   @Delete(':id')
   deleteReport(@Param('id') id: string) {
-    const reportIndex = data.report.findIndex((report) => report.id === id);
-    if (reportIndex === -1) throw new NotFoundException();
-    data.report.splice(reportIndex, 1);
+    return this.appService.deleteReport(id);
   }
 }
