@@ -23,7 +23,7 @@ export class AppService {
       source,
       createdAt: new Date(),
       updatedAt: new Date(),
-      type: type === 'income' ? ReportType.INCOME : ReportType.EXPENSE,
+      type,
     };
 
     data.report.push(newReport);

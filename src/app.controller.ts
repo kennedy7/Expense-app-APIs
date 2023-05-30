@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { AppService } from './app.service';
 import { data, ReportType } from './data';
-import { v4 as uuid } from 'uuid';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
@@ -32,17 +31,9 @@ export class AppController {
     @Body() { amount, source }: { amount: number; source: string },
     @Param('type', ReportTypeValidationPipe) type: ReportType,
   ) {
-    const newReport = {
-      id: uuid(),
-      source,
-      amount,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      type: type === 'income' ? ReportType.INCOME : ReportType.EXPENSE,
-    };
-
-    data.report.push(newReport);
-    return newReport;
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    return this.appService.createReport(reportType, { amount, source });
   }
   @Patch(':id')
   updateReport(
