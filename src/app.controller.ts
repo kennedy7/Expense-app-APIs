@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
-import { report } from 'process';
 
 @Controller('report/:type')
 export class AppController {
@@ -15,7 +14,7 @@ export class AppController {
   getAllReports(@Param('type') type: string) {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
-    return data.report.filter((report) => report.type === reportType);
+    return this.appService.getAllReports(reportType);
   }
 
   @Get(':id')
