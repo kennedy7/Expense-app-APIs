@@ -4,6 +4,7 @@ import { data, ReportType } from './data';
 import { v4 as uuid } from 'uuid';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { Delete } from '@nestjs/common/decorators';
 
 @Controller('report/:type')
 export class AppController {
@@ -70,4 +71,6 @@ export class AppController {
     };
     return data.report[reportIndex];
   }
+  @Delete(':id')
+  deleteReport(@Param('id') id: string) {}
 }
