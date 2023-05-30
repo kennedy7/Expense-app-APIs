@@ -1,6 +1,7 @@
 import { Injectable, Param } from '@nestjs/common';
 import { data, ReportType } from './data';
 import { v4 as uuid } from 'uuid';
+import { NotFoundException } from '@nestjs/common/exceptions';
 
 interface ReportDto {
   amount: number;
@@ -28,5 +29,23 @@ export class AppService {
 
     data.report.push(newReport);
     return newReport;
+  }
+  updateReport(type: ReportType, id: string, body: ReportDto) {
+    const reportToUpdate = data.report
+      .filter((report) => report.type === type)
+      .find((report) => report.id === id);
+    if (!reportToUpdate)
+      throw new NotFoundException(
+        'No report with the Id or report type, check credentials and try again',
+      );
+
+    const reportIndex = data.report.findIndex(
+      (report) => report.id === reportToUpdate.id,
+    );
+    data.report[reportIndex] = {
+      ...data.report[reportIndex],
+      ...body,
+    };
+    return data.report[reportIndex];
   }
 }

@@ -2,7 +2,6 @@ import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { AppService } from './app.service';
 import { data, ReportType } from './data';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
-import { NotFoundException } from '@nestjs/common/exceptions';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
 
 @Controller('report/:type')
@@ -43,22 +42,7 @@ export class AppController {
   ) {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
-    const reportToUpdate = data.report
-      .filter((report) => report.type === reportType)
-      .find((report) => report.id === id);
-    if (!reportToUpdate)
-      throw new NotFoundException(
-        'No report with the Id or report type, check credentials and try again',
-      );
-
-    const reportIndex = data.report.findIndex(
-      (report) => report.id === reportToUpdate.id,
-    );
-    data.report[reportIndex] = {
-      ...data.report[reportIndex],
-      ...body,
-    };
-    return data.report[reportIndex];
+    return this.appService.updateReport(reportType, id, body);
   }
   @HttpCode(204)
   @Delete(':id')
