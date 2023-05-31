@@ -6,6 +6,7 @@ import {
   Body,
   Patch,
   ParseUUIDPipe,
+  ParseEnumPipe,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ReportType } from './data';
