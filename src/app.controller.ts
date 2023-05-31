@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Patch,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { ReportType } from './data';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
@@ -18,7 +26,7 @@ export class AppController {
   @Get(':id')
   getReportById(
     @Param('type', ReportTypeValidationPipe) type: string,
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
   ) {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
@@ -37,7 +45,7 @@ export class AppController {
   @Patch(':id')
   updateReport(
     @Param('type', ReportTypeValidationPipe) type: string,
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() body: { amount: number; source: string },
   ) {
     const reportType =
@@ -46,7 +54,7 @@ export class AppController {
   }
   @HttpCode(204)
   @Delete(':id')
-  deleteReport(@Param('id') id: string) {
+  deleteReport(@Param('id', ParseUUIDPipe) id: string) {
     return this.appService.deleteReport(id);
   }
 }
