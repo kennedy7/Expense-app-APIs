@@ -26,7 +26,7 @@ export class AppController {
 
   @Get(':id')
   getReportById(
-    @Param('type', ReportTypeValidationPipe) type: string,
+    @Param('type', new ParseEnumPipe(ReportType)) type: string,
     @Param('id', ParseUUIDPipe) id: string,
   ) {
     const reportType =
