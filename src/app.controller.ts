@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 import { ReportType } from './data';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
+import { CreateReportDto } from './dtos/report.dto';
 
 @Controller('report/:type')
 export class AppController {
@@ -26,6 +27,7 @@ export class AppController {
 
   @Get(':id')
   getReportById(
+    //alternative way of validating the reportType with an already existing module
     @Param('type', new ParseEnumPipe(ReportType)) type: string,
     @Param('id', ParseUUIDPipe) id: string,
   ) {
@@ -36,7 +38,7 @@ export class AppController {
 
   @Post()
   createReport(
-    @Body() { amount, source }: { amount: number; source: string },
+    @Body() { amount, source }: CreateReportDto,
     @Param('type', ReportTypeValidationPipe) type: ReportType,
   ) {
     const reportType =
