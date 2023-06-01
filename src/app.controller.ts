@@ -12,14 +12,18 @@ import { AppService } from './app.service';
 import { ReportType } from './data';
 import { ReportTypeValidationPipe } from './pipes/report-type-validation.pipe';
 import { Delete, HttpCode } from '@nestjs/common/decorators';
-import { CreateReportDto, UpdateReportDto } from './dtos/report.dto';
+import {
+  CreateReportDto,
+  ReportResponseDto,
+  UpdateReportDto,
+} from './dtos/report.dto';
 
 @Controller('report/:type')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getAllReports(@Param('type') type: string) {
+  getAllReports(@Param('type') type: string): ReportResponseDto[] {
     const reportType =
       type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
     return this.appService.getAllReports(reportType);
