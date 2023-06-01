@@ -14,9 +14,11 @@ export class AppService {
     return data.report.filter((report) => (report.type = type));
   }
   getReportById(type: ReportType, id: string): ReportResponseDto {
-    return data.report
+    const report = data.report
       .filter((report) => report.type === type)
       .find((report) => report.id === id);
+    if (!report) return;
+    return new ReportResponseDto(report);
   }
   createReport(
     type: ReportType,
