@@ -5,6 +5,7 @@ import {
   IsString,
   IsOptional,
 } from 'class-validator';
+import { ReportType } from 'src/data';
 
 export class CreateReportDto {
   @IsNumber()
@@ -26,4 +27,13 @@ export class UpdateReportDto {
   @IsNumber()
   @IsPositive()
   amount: number;
+}
+
+export class ReportResponse {
+  id: string;
+  source: string;
+  amount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  type: ReportType;
 }
