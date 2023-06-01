@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNumber,
@@ -29,11 +30,13 @@ export class UpdateReportDto {
   amount: number;
 }
 
-export class ReportResponse {
+export class ReportResponseDto {
   id: string;
   source: string;
   amount: number;
   createdAt: Date;
+
+  @Exclude()
   updatedAt: Date;
   type: ReportType;
 }
