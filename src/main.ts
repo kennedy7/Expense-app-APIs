@@ -5,7 +5,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   //enabling globalPipes
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      //helps keep the dto very strict to avoid update with non-dto parameter
+      whitelist: true,
+    }),
+  );
   await app.listen(3000);
 }
 bootstrap();
