@@ -4,10 +4,6 @@ import { v4 as uuid } from 'uuid';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { CreateReportDto, UpdateReportDto } from './dtos/report.dto';
 
-// interface ReportDto {
-//   amount: number;
-//   source: string;
-// }
 @Injectable()
 export class AppService {
   getAllReports(type: ReportType) {
