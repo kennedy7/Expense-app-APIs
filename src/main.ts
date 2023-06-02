@@ -10,6 +10,9 @@ async function bootstrap() {
       //helps keep the dto very strict to avoid update with non-dto parameter
       whitelist: true,
       transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
   await app.listen(3000);
