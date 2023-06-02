@@ -11,7 +11,9 @@ import {
 @Injectable()
 export class AppService {
   getAllReports(type: ReportType): ReportResponseDto[] {
-    return data.report.filter((report) => (report.type = type));
+    return data.report
+      .filter((report) => report.type === type)
+      .map((report) => new ReportResponseDto(report));
   }
   getReportById(type: ReportType, id: string): ReportResponseDto {
     const report = data.report
