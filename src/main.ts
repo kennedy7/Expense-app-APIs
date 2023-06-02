@@ -9,6 +9,7 @@ async function bootstrap() {
     new ValidationPipe({
       //helps keep the dto very strict to avoid update with non-dto parameter
       whitelist: true,
+      transform: true,
     }),
   );
   await app.listen(3000);
