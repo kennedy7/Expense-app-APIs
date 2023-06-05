@@ -11,4 +11,4 @@ import { AppService } from './app.service';
     { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
   ],
 })
-export class AppModule {}
+export class AppModuleS {}

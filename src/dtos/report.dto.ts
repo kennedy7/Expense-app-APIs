@@ -38,6 +38,7 @@ export class ReportResponseDto {
 
   @Exclude()
   updatedAt: Date;
+
   type: ReportType;
 
   constructor(partial: Partial<ReportResponseDto>) {
